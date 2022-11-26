@@ -1,15 +1,23 @@
 import type { GetStaticProps, GetStaticPaths } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { findSongs } from "../../cms/client";
+import SongCard from "../../components/card/song";
 import { GAMES } from "../../constants/domain";
 
 export default ({ game, songs }: SongPageProps) => {
 
     return (
-        <>
+        <div className="flex flex-col space-y-5">
             {game}
-            {JSON.stringify(songs)}
-        </>
+
+            {songs.map(song => 
+                <>
+                    <SongCard song={song} />
+                    <div className="divider"></div> 
+                </>
+            )}
+
+        </div>
     )
 
 }

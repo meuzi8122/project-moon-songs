@@ -7,4 +7,6 @@ type Song = {
     title: string;
     game: Game;
     kind: Kind;
+    youtubeUrl: string;
+    artworkUrl: string;
 }
