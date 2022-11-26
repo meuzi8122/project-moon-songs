@@ -9,7 +9,7 @@ export default ({ Component, pageProps }: AppProps) => {
         <Head>
             <meta charSet="utf-8" lang="ja" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <title>no title</title>
+            <title>PM Songs</title>
         </Head>
         <Layout>
           <Component {...pageProps} />
