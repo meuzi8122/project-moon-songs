@@ -7,14 +7,13 @@ import { GAMES } from "../../constants/domain";
 export default ({ game, songs }: SongPageProps) => {
 
     return (
-        <div className="flex flex-col space-y-5">
-            {game}
+        <div className="flex flex-col space-y-5 mt-5 max-w-3xl">
 
             {songs.map(song => 
-                <>
+                <div key={song.id}>
                     <SongCard song={song} />
                     <div className="divider"></div> 
-                </>
+                </div>
             )}
 
         </div>

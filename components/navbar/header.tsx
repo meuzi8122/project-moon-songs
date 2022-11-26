@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GAMES } from "../constants/domain";
+import { GAMES } from "../../constants/domain";
 
 export default () => {
 
