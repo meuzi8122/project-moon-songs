@@ -9,7 +9,7 @@ export class SongService {
             game: content.game,
             kind: content.kind,
             youtubeUrl: content.youtube,
-            artworkUrl: `${content.artwork.url}?fit=crop&w=380&h=200`
+            artworkUrl: `${content.artwork.url}?fit=crop&w=400&h=240`
         }
     }
 

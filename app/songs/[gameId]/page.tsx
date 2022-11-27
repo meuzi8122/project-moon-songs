@@ -7,15 +7,14 @@ import { GAMES } from "../../../constants/domain";
 export default async ({ params }: { params: { gameId: string } }) => {
 
     const { gameId } = params;
+    const game = GAMES[gameId];
     //const songs = use(SongService.findSongs(GAMES[gameId]));
-    const songs = await SongService.findSongs(GAMES[gameId]);
+    const songs = await SongService.findSongs(game);
 
     return (
-        <div className="flex flex-col space-y-5 mt-5 max-w-3xl">
+        <div className="mt-12">
 
-            <h1 className="text-3xl">{GAMES[gameId]}</h1>
-
-            <SongBoard songs={songs} />
+            <SongBoard game={game} songs={songs} />
 
         </div>
     )

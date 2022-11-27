@@ -7,5 +7,6 @@ type SongCardProps = {
 }
 
 type SongBoardProps = { 
+    game: Game;
     songs: Song[];
 }
