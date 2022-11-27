@@ -13,7 +13,7 @@ export default async ({ params }: { params: { gameId: string } }) => {
     return (
         <div className="flex flex-col space-y-5 mt-5 max-w-3xl">
 
-            {GAMES[gameId]}
+            <h1 className="text-3xl">{GAMES[gameId]}</h1>
 
             <SongBoard songs={songs} />
 

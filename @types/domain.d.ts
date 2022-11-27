@@ -1,6 +1,6 @@
 type Game = "Lobotomy Corporation" | "Library of Ruina" | "Limbus Company";
 
-type Kind = "bgm" | "vocal";
+type Kind = "BGM" | "Vocal";
 
 type Song = {
     id: string;

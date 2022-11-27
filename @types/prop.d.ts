@@ -6,3 +6,6 @@ type SongCardProps = {
     song: Song;
 }
 
+type SongBoardProps = { 
+    songs: Song[];
+}
