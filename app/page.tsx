@@ -6,7 +6,7 @@ export default () => {
                 <div className="max-w-lg">
                     <h1 className="text-5xl font-bold">PM Songs</h1>
                     <p className="py-6">Project Moonが配信するゲームで使用された楽曲の非公式まとめ</p>
-                    <div className="flex flex-col space-y-1 mb-10">
+                    <div className="flex flex-col space-y-2 mb-10">
                         <a href="https://store.steampowered.com/curator/40685294" target="_blank">@ProjectMoon_Official (Steam)</a>
                         <a href="https://twitter.com/projmoonstudio" target="_blank">@ProjMoonStudio (Twitter)</a>
                         <a href="https://www.youtube.com/@ProjectMoonOfficial" target="_blank">@ProjectMoonOfficial (Youtube)</a>

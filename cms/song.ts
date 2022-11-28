@@ -1,3 +1,5 @@
+import { IMAGE_OPTIONS } from "../constants/domain";
+
 export class SongService {
 
     private static endpoint = `https://${process.env.SERVICE_DOMAIN}.microcms.io/api/v1/songs`;
@@ -9,7 +11,7 @@ export class SongService {
             game: content.game,
             kind: content.kind,
             youtubeUrl: content.youtube,
-            artworkUrl: `${content.artwork.url}?fit=crop&w=400&h=240`
+            artworkUrl: `${content.artwork.url}?fit=crop&w=${IMAGE_OPTIONS.width}&h=${IMAGE_OPTIONS.height}`
         }
     }
 
