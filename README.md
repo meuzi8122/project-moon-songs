@@ -12,3 +12,6 @@
 
 - @next/font/google
   - ビルド時に google フォントをダウンロード・最適化
+
+- svg
+  - ```fill="white"```で白色にできる
