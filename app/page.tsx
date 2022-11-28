@@ -11,7 +11,7 @@ export default () => {
                         <a href="https://twitter.com/projmoonstudio" target="_blank">@ProjMoonStudio (Twitter)</a>
                         <a href="https://www.youtube.com/@ProjectMoonOfficial" target="_blank">@ProjectMoonOfficial (Youtube)</a>
                     </div>
-                    <p>当サイトに掲載する画像の著作権等は、当該コンテンツの所有者に帰属します。</p>
+                    <p>当サイトの画像の著作権等は、当該コンテンツの所有者に帰属します。</p>
                 </div>
             </div>
         </div>

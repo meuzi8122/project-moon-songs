@@ -7,9 +7,7 @@ export default ({ song }: SongCardProps) => {
 
     return (
         <div className="card card-side bg-base-300 rounded-box min-width-6xl">
-            <figure>
-                <img src={song.artworkUrl} />
-            </figure>
+            <Image src={song.artworkUrl} alt={song.title} width={400} height={220} />
             <div className="card-body">
                 <h2 className="card-title">{song.title}</h2>
                 <p>{`${song.game} / ${song.kind}`}</p>
