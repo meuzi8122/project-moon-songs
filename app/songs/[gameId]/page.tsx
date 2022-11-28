@@ -1,5 +1,5 @@
 import { SongService } from "../../../cms/song";
-import SongBoard from "../../../components/board/song";
+import SongCard from "../../../components/card/song";
 import { GAMES } from "../../../constants/domain";
 
 export default async ({ params }: SongPageProps) => {
@@ -9,8 +9,17 @@ export default async ({ params }: SongPageProps) => {
     const songs = await SongService.findSongs(game);
 
     return (
-        <div className="mt-12">
-            <SongBoard game={game} songs={songs} />
+        <div className="flex flex-wrap flex-col content-center mt-8">
+
+            <h1 className="text-2xl font-semibold text-center mb-8">{game}</h1>
+
+            {songs.map(song => 
+                <div key={song.id}>
+                    <SongCard song={song} />
+                    <div className="divider"></div> 
+                </div>
+            )}
+
         </div>
     )
 
