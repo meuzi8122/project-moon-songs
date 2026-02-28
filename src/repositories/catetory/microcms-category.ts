@@ -9,14 +9,14 @@ export function createMicrocmsCategoryRepository(): CategoryRepository {
                 queries: {
                     fields: "id,name,game",
                     filters: `game[contains]${game}`,
-                    orders: "sortOrder"
+                    orders: "sortOrder",
                 },
             });
             // 「ゲームが配列なのを文字列に直す」のはMicroCMS特有の関心ごとなので、エンティティの処理には入れない
             return categories.map((category) => ({
                 ...category,
                 game: category.game[0] as string,
-            }));  
-        }
-    }
+            }));
+        },
+    };
 }
