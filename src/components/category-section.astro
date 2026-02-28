@@ -4,19 +4,23 @@ import type { Category, Game } from "@/domains/entities/category";
 type Props = {
     game: Game;
     categories: Category[];
+    currentCategoryId?: string;
 };
 
-const { game, categories } = Astro.props;
+const { game, categories, currentCategoryId } = Astro.props;
 ---
 
 <div class="shadow-md p-4">
-    <h3 class="mb-2 font-bold">{game}</h3>
+    <h2 class="mb-2 font-bold text-xl">{game}</h2>
     <div
         class="flex space-x-1.5 space-y-2 flex-wrap overflow-y-scroll max-h-30"
     >
         {
             categories.map((category) => (
-                <a href={`/categories/${category.id}`} class="button">
+                <a
+                    href={`/categories/${category.id}`}
+                    class={`btn btn-sm ${currentCategoryId === category.id ? "btn-error" : ""}`}
+                >
                     {category.name}
                 </a>
             ))

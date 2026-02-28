@@ -19,55 +19,62 @@ const songsWithStartSeconds = songs
 ---
 
 <>
-    <ul class="space-y-2">
+    <ul class="space-y-3">
         {
             songsWithStartSeconds.map((song) => (
                 <>
-                    <li class="card card-side bg-base-100 shadow-sm">
-                        <figure class="w-32 h-18 lg:w-64 lg:h-36 flex-shrink-0">
+                    <li class="card card-side bg-base-100 shadow-sm items-stretch">
+                        {/* サムネイル */}
+                        <figure class="w-24 sm:w-32 lg:w-64 aspect-video flex-shrink-0">
                             <img
                                 src={createThumbnailUrl(song)}
                                 alt="動画サムネイル"
                                 class="object-cover w-full h-full"
                             />
                         </figure>
+
+                        {/* テキスト情報（中央で伸縮） */}
                         <div class="card-body p-2 lg:p-4 flex-1 min-w-0">
-                            <p class="text-xs lg:text-sm">
+                            <p class="text-xs lg:text-sm text-base-content/60">
                                 {song.category.game}
                             </p>
-                            <h2 class="card-title text-sm lg:text-xl truncate mb-auto">
+                            <h2 class="card-title text-sm lg:text-xl truncate">
                                 {song.title}
                             </h2>
-                            <p class="text-xs lg:text-sm text-base-content/50">
+                            <p class="text-xs lg:text-sm text-base-content/50 mt-auto">
                                 {song.category.name}
                             </p>
-                            <div class="card-actions justify-end">
-                                <PlayButton
-                                    videoId={song.videoId}
-                                    startSeconds={song.startSeconds}
-                                />
-                                <a
-                                    href={createVideoUrl(song)}
-                                    class="btn btn-sm"
-                                    target="_blank"
+                        </div>
+
+                        {/* ボタン（右端・下部に固定）*/}
+                        <div class="flex gap-2 p-2 lg:p-4 flex-shrink-0 self-end">
+                            <PlayButton
+                                videoId={song.videoId}
+                                startSeconds={song.startSeconds}
+                            />
+                            <a
+                                href={createVideoUrl(song)}
+                                class="btn btn-sm"
+                                target="_blank"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="size-4 lg:size-6"
                                 >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.5"
-                                        stroke="currentColor"
-                                        class="size-6"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                                        />
-                                    </svg>
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                                    />
+                                </svg>
+                                <span class="hidden lg:inline">
                                     Youtubeで視聴
-                                </a>
-                            </div>
+                                </span>
+                            </a>
                         </div>
                     </li>
                     <div class="divider" />
