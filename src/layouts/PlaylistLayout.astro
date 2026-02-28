@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "./Layout.astro";
+import CategorySection from "../components/category-section.astro";
+import type { Game } from "../domains/entities/category";
+import type { Song } from "../domains/entities/song";
+import SongList from "../components/song-list.astro";
+
+type Props = {
+    songs: Song[];
+};
+
+const { songs } = Astro.props;
+
+const perGameCategories = (await getCollection("categories")).toSorted(
+    (a, b) => a.data.sortOrder - b.data.sortOrder,
+);
+---
+
+<Layout>
+    <div class="container mx-auto">
+        <div>
+            {
+                perGameCategories.map((categories) => (
+                    <CategorySection
+                        game={categories.data.id as Game}
+                        categories={categories.data.categories}
+                    />
+                ))
+            }
+        </div>
+        {
+            songs.length > 0 ? (
+                <SongList songs={songs} />
+            ) : (
+                <p>楽曲が見つかりません</p>
+            )
+        }
+    </div>
+</Layout>

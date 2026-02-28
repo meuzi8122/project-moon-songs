@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content";
+import PlaylistLayout from "../../layouts/PlaylistLayout.astro";
+
+export async function getStaticPaths() {
+    const perGameCategories = await getCollection("categories");
+    const songs = await getCollection("songs");
+
+    const categoryIds = perGameCategories
+        .map((collection) =>
+            collection.data.categories.map((category) => category.id),
+        )
+        .flat();
+
+    return categoryIds.map((categoryId) => ({
+        params: { categoryId },
+        props: {
+            songs: songs.flatMap((song) =>
+                song.data.category.id === categoryId ? [song.data] : [],
+            ),
+        },
+    }));
+}
+
+const { songs } = Astro.props;
+---
+
+<PlaylistLayout songs={songs} />

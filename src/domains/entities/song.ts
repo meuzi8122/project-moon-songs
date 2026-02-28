@@ -1,8 +1,9 @@
+import type { Category } from "./category";
+
 export interface Song {
     id: string;
     title: string;
-    game: Game;
-    tag: string;
+    category: Category;
     videoUrl: string;
     thumbnailUrl: string;
 }
@@ -10,11 +11,6 @@ export interface Song {
 export type RawSong = Omit<Song, "videoUrl" | "thumbnailUrl"> & {
     videoId: string;
 };
-
-export type Game =
-    | "Lobotomy Corporation"
-    | "Library of Ruina"
-    | "Limbus Company";
 
 /*
 default: 120 x 90
