@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import PlaylistLayout from "../../layouts/PlaylistLayout.astro";
+import Layout from "@/layouts/Layout.astro";
+import SongSearch from "@/components/song-search.astro";
 
 export async function getStaticPaths() {
     const perGameCategories = await getCollection("categories");
@@ -25,4 +26,6 @@ export async function getStaticPaths() {
 const { songs } = Astro.props;
 ---
 
-<PlaylistLayout songs={songs} />
+<Layout>
+    <SongSearch songs={songs} />
+</Layout>

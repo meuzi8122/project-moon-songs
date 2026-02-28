@@ -1,8 +1,11 @@
 ---
 import { getCollection } from "astro:content";
-import PlaylistLayout from "../layouts/PlaylistLayout.astro";
+import Layout from "@/layouts/Layout.astro";
+import SongSearch from "@/components/song-search.astro";
 
 const songs = await getCollection("songs");
 ---
 
-<PlaylistLayout songs={songs.map((song) => song.data)} />
+<Layout>
+    <SongSearch songs={songs.map((song) => song.data)} />
+</Layout>

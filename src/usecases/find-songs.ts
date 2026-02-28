@@ -1,5 +1,5 @@
-import { createSong, type Song } from "../domains/entities/song";
-import type { SongRepository } from "../repositories/song/song-repository";
+import { createSong, type Song } from "@/domains/entities/song";
+import type { SongRepository } from "@/repositories/song/song-repository";
 
 /* 
 リポジトリのインターフェースを指定することで、ユースケースはリポジトリの具体を知らずに済む
