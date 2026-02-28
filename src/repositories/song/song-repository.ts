@@ -1,5 +1,5 @@
-import type { RawSong } from "@/domains/entities/song";
+import type { Song } from "@/domains/entities/song";
 
 export interface SongRepository {
-    findSongs: () => Promise<RawSong[]>;
+    findSongs: () => Promise<Song[]>;
 }
