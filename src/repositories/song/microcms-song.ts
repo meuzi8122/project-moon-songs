@@ -1,10 +1,10 @@
+import type { SongRepository } from "./song-repository";
 import type { RawSong } from "@/domains/entities/song";
 import { cmsClient } from "@/infrastructures/microcms-client";
 import {
     parseCategory,
     type CmsCategory,
 } from "@/repositories/catetory/microcms-category";
-import type { SongRepository } from "./song-repository";
 
 async function createCmsSongRepository(): Promise<SongRepository> {
     return {

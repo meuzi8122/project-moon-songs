@@ -1,6 +1,6 @@
+import type { CategoryRepository } from "./category-repository";
 import type { Category, Game } from "@/domains/entities/category";
 import { cmsClient } from "@/infrastructures/microcms-client";
-import type { CategoryRepository } from "./category-repository";
 
 export type CmsCategory = Category & { game: Game[] };
 
