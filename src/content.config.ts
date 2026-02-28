@@ -64,8 +64,7 @@ const songCollection = defineCollection({
         id: z.string(),
         title: z.string(),
         category: categorySchema,
-        videoUrl: z.string(),
-        thumbnailUrl: z.string(),
+        videoId: z.string(),
     }),
     loader: async () => {
         return await findSongs({ repo: microcmsSongRepository });

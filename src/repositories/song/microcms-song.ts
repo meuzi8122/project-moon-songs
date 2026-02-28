@@ -1,5 +1,5 @@
 import type { SongRepository } from "./song-repository";
-import type { RawSong } from "@/domains/entities/song";
+import type { Song } from "@/domains/entities/song";
 import { cmsClient } from "@/infrastructures/microcms-client";
 import {
     parseCategory,
@@ -8,10 +8,10 @@ import {
 
 async function createCmsSongRepository(): Promise<SongRepository> {
     return {
-        findSongs: async (): Promise<RawSong[]> => {
+        findSongs: async (): Promise<Song[]> => {
             return (
                 await cmsClient.getAllContents<
-                    RawSong & { category: CmsCategory }
+                    Song & { category: CmsCategory }
                 >({
                     endpoint: "songs",
                     queries: {

@@ -1,4 +1,4 @@
-import { createSong, type Song } from "@/domains/entities/song";
+import { type Song } from "@/domains/entities/song";
 import type { SongRepository } from "@/repositories/song/song-repository";
 
 /* 
@@ -10,5 +10,5 @@ export async function findSongs({
 }: {
     repo: SongRepository;
 }): Promise<Song[]> {
-    return (await repo.findSongs()).map((song) => createSong(song));
+    return await repo.findSongs();
 }

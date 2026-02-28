@@ -1,5 +1,5 @@
 ---
-import type { Song } from "@/domains/entities/song";
+import { createThumbnailUrl, type Song } from "@/domains/entities/song";
 
 type Props = {
     songs: Song[];
@@ -8,36 +8,92 @@ type Props = {
 const { songs } = Astro.props;
 ---
 
-<ul class="space-y-2">
-    {
-        songs.map((song) => (
-            <>
-                <li class="card card-side bg-base-100 shadow-sm">
-                    <figure class="w-32 h-18 lg:w-64 lg:h-36 flex-shrink-0">
-                        <a href={`/songs/${song.id}`}>
+<>
+    <ul class="space-y-2">
+        {
+            songs.map((song) => (
+                <>
+                    <li class="card card-side bg-base-100 shadow-sm">
+                        <figure class="w-32 h-18 lg:w-64 lg:h-36 flex-shrink-0">
                             <img
-                                src={song.thumbnailUrl}
+                                src={createThumbnailUrl(song)}
                                 alt="動画サムネイル"
                                 class="object-cover w-full h-full"
                             />
-                        </a>
-                    </figure>
-                    <div class="card-body p-2 lg:p-4 flex-1 min-w-0">
-                        <a href={`/songs/${song.id}`} class="block">
+                        </figure>
+                        <div class="card-body p-2 lg:p-4 flex-1 min-w-0">
                             <h2 class="card-title text-sm lg:text-xl truncate">
                                 {song.title}
                             </h2>
-                        </a>
-                        <p class="text-xs lg:text-sm text-base-content/50 truncate mt-auto">
-                            {song.category.game}
-                        </p>
-                        <p class="text-xs lg:text-sm text-base-content/50">
-                            {song.category.name}
-                        </p>
-                    </div>
-                </li>
-                <div class="divider" />
-            </>
-        ))
-    }
-</ul>
+                            <p class="text-xs lg:text-sm text-base-content/50 truncate mt-auto">
+                                {song.category.game}
+                            </p>
+                            <p class="text-xs lg:text-sm text-base-content/50">
+                                {song.category.name}
+                            </p>
+                            <button type="button" data-video-id={song.videoId}>
+                                再生
+                            </button>
+                        </div>
+                    </li>
+                    <div class="divider" />
+                </>
+            ))
+        }
+    </ul>
+    <div id="player" class="invisible"></div>
+</>
+
+<script is:inline lang="ts">
+    let isPlaying = false;
+    let player = null;
+    let isReady = false;
+
+    // YouTube IFrame API読み込み
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+
+    window.onYouTubeIframeAPIReady = () => {
+        player = new YT.Player("player", {
+            width: "100%",
+            height: "480",
+            playerVars: {
+                autoplay: 1,
+            },
+            events: {
+                onReady: () => {
+                    isReady = true;
+                },
+                onStateChange: (event) => {
+                    isPlaying = event.data === YT.PlayerState.PLAYING;
+                },
+            },
+        });
+    };
+
+    // ボタンクリックで動画切り替え
+    document.querySelectorAll("[data-video-id]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const videoId = btn.dataset.videoId;
+            if (!videoId) return;
+
+            if (isPlaying) {
+                player.pauseVideo();
+                return;
+            }
+
+            if (isReady && player) {
+                player.loadVideoById(videoId);
+            } else {
+                // プレイヤー未準備の場合は初期化時に読み込む
+                player = new YT.Player("player", {
+                    videoId,
+                    width: "100%",
+                    height: "480",
+                    playerVars: { autoplay: 1 },
+                });
+            }
+        });
+    });
+</script>
