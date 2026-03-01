@@ -10,13 +10,7 @@
         "build": "astro build",
         "preview": "astro preview",
         "astro": "astro",
-        "format": "npx prettier . --write",
-        "precommit": "npm run format"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "precommit"
-        }
+        "format": "npx prettier . --write"
     },
     "dependencies": {
         "@tailwindcss/vite": "^4.2.1",
