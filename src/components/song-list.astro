@@ -91,36 +91,38 @@ const songsWithStartSeconds = songs
     let startSeconds: number = 0;
     let isReady = false;
 
-    const player = createPlayer({
-        embedElementId: "player",
-        onReady: ({ target: _target }) => {
-            isReady = true;
-        },
-        onStateChange: (_event) => {},
-    });
+    window.YT.ready(() => {
+        const player = createPlayer({
+            embedElementId: "player",
+            onReady: ({ target: _target }) => {
+                isReady = true;
+            },
+            onStateChange: (_event) => {},
+        });
 
-    (
-        document.querySelectorAll(
-            "[data-video-id]",
-        ) as NodeListOf<HTMLButtonElement>
-    ).forEach((btn) => {
-        // 動画ごとに再生ボタン押下時のイベントを登録
-        btn.addEventListener("click", () => {
-            if (!isReady) return;
+        (
+            document.querySelectorAll(
+                "[data-video-id]",
+            ) as NodeListOf<HTMLButtonElement>
+        ).forEach((btn) => {
+            // 動画ごとに再生ボタン押下時のイベントを登録
+            btn.addEventListener("click", () => {
+                if (!isReady) return;
 
-            if (
-                btn.dataset.videoId === videoId &&
-                startSeconds === Number(btn.dataset.startSeconds)
-            ) {
-                player.pauseVideo();
-                return;
-            }
+                if (
+                    btn.dataset.videoId === videoId &&
+                    startSeconds === Number(btn.dataset.startSeconds)
+                ) {
+                    player.pauseVideo();
+                    return;
+                }
 
-            videoId = btn.dataset.videoId!;
-            startSeconds = Number(btn.dataset.startSeconds);
-            player.loadVideoById({
-                videoId: videoId,
-                startSeconds,
+                videoId = btn.dataset.videoId!;
+                startSeconds = Number(btn.dataset.startSeconds);
+                player.loadVideoById({
+                    videoId: videoId,
+                    startSeconds,
+                });
             });
         });
     });
