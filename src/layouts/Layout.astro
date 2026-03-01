@@ -1,6 +1,7 @@
 ---
 // 相対パスだとルート直下以外のパス（/categories/xxなど）でパスがズレて読み込めなくなるためエイリアスで指定
 import "@/assets/app.css";
+import Navbar from "@/components/navbar.astro";
 ---
 
 <!doctype html>
@@ -14,9 +15,7 @@ import "@/assets/app.css";
         <title>プロムン楽曲</title>
     </head>
     <body>
-        <div class="navbar bg-neutral text-neutral-content">
-            <a href="/" class="btn btn-ghost text-xl">プロムン楽曲</a>
-        </div>
+        <Navbar />
         <slot />
     </body>
 </html>
