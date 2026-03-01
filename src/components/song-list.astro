@@ -85,61 +85,46 @@ const songsWithStartSeconds = songs
     <div id="player" class="invisible"></div>
 </>
 
-<script is:inline lang="ts">
-    let isPlaying = false;
-    let player = null;
+<script src="https://www.youtube.com/iframe_api" is:inline></script>
+
+<script>
+    import { createPlayer } from "@/infrastructures/youtube";
+
+    let videoId: string | null = null;
+    let startSeconds: number = 0;
     let isReady = false;
 
-    // YouTube IFrame API読み込み
-    const tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.head.appendChild(tag);
+    const player = createPlayer({
+        embedElementId: "player",
+        onReady: ({ target: _target }) => {
+            isReady = true;
+        },
+        onStateChange: (_event) => {},
+    });
 
-    window.onYouTubeIframeAPIReady = () => {
-        player = new YT.Player("player", {
-            width: "100%",
-            height: "480",
-            playerVars: {
-                autoplay: 1,
-                start: 3000,
-            },
-            events: {
-                onReady: () => {
-                    isReady = true;
-                },
-                onStateChange: (event) => {
-                    isPlaying = event.data === YT.PlayerState.PLAYING;
-                },
-            },
-        });
-    };
-
-    // ボタンクリックで動画切り替え
-    document.querySelectorAll("[data-video-id]").forEach((btn) => {
+    (
+        document.querySelectorAll(
+            "[data-video-id]",
+        ) as NodeListOf<HTMLButtonElement>
+    ).forEach((btn) => {
+        // 動画ごとに再生ボタン押下時のイベントを登録
         btn.addEventListener("click", () => {
-            console.log(btn.dataset.startSeconds);
-            const videoId = btn.dataset.videoId;
-            if (!videoId) return;
+            if (!isReady) return;
 
-            if (isPlaying) {
+            if (
+                btn.dataset.videoId === videoId &&
+                startSeconds === Number(btn.dataset.startSeconds)
+            ) {
                 player.pauseVideo();
                 return;
             }
 
-            if (isReady && player) {
-                player.loadVideoById({
-                    videoId,
-                    startSeconds: Number(btn.dataset.startSeconds) || 0,
-                });
-            } else {
-                // プレイヤー未準備の場合は初期化時に読み込む
-                player = new YT.Player("player", {
-                    videoId,
-                    width: "100%",
-                    height: "480",
-                    playerVars: { autoplay: 1, start: 3000 },
-                });
-            }
+            videoId = btn.dataset.videoId!;
+            startSeconds = Number(btn.dataset.startSeconds);
+            player.loadVideoById({
+                videoId: videoId,
+                startSeconds,
+            });
         });
     });
 </script>
