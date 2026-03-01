@@ -22,7 +22,7 @@ const perGameCategories = (await getCollection("categories")).toSorted(
 );
 ---
 
-<div class="container mx-auto mt-5 flex flex-col gap-6">
+<div class="container mx-auto mt-5 flex flex-col gap-6 px-6">
     <div class="flex flex-col gap-4">
         {
             perGameCategories.map((categories) => (
