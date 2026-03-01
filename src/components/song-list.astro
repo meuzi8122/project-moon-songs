@@ -41,7 +41,9 @@ const songsWithStartSeconds = songs
                             {song.title}
                         </h2>
                         <p class="text-xs lg:text-sm text-base-content/50 mt-auto">
-                            {song.category.name}
+                            <a href={`/categories/${song.category.id}`}>
+                                {song.category.name}
+                            </a>
                         </p>
                     </div>
 
