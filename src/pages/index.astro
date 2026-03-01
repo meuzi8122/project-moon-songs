@@ -1,11 +1,8 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import SongSearch from "@/components/song-search.astro";
-
-const songs = await getCollection("songs");
 ---
 
 <Layout>
-    <SongSearch songs={songs.map((song) => song.data)} />
+    <SongSearch noCategorySelected />
 </Layout>

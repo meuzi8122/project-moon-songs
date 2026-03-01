@@ -7,10 +7,15 @@ import SongList from "@/components/song-list.astro";
 
 type Props = {
     currentCategoryId?: string;
-    songs: Song[];
+    songs?: Song[];
+    noCategorySelected?: boolean;
 };
 
-const { currentCategoryId, songs } = Astro.props;
+const {
+    currentCategoryId,
+    songs = [],
+    noCategorySelected = false,
+} = Astro.props;
 
 const perGameCategories = (await getCollection("categories")).toSorted(
     (a, b) => a.data.sortOrder - b.data.sortOrder,
@@ -30,7 +35,9 @@ const perGameCategories = (await getCollection("categories")).toSorted(
         }
     </div>
     {
-        songs.length > 0 ? (
+        noCategorySelected ? (
+            <p>カテゴリーを選択してください</p>
+        ) : songs.length > 0 ? (
             <SongList songs={songs} />
         ) : (
             <p>楽曲が見つかりません</p>
