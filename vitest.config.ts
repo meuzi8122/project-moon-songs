@@ -1,0 +1,13 @@
+/// <reference types="vitest/config" />
+import { getViteConfig } from "astro/config";
+
+export default getViteConfig({
+    test: {
+        include: ["src/**/*.{test,spec}.{ts,tsx}"],
+        server: {
+            deps: {
+                inline: ["cookie", /^astro/],
+            },
+        },
+    },
+});

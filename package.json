@@ -10,7 +10,8 @@
         "build": "astro build",
         "preview": "astro preview",
         "astro": "astro",
-        "format": "npx prettier . --write"
+        "format": "npx prettier . --write",
+        "test": "vitest"
     },
     "dependencies": {
         "@tailwindcss/vite": "^4.2.1",
@@ -23,6 +24,7 @@
     "devDependencies": {
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
         "prettier": "3.8.1",
-        "prettier-plugin-astro": "0.14.1"
+        "prettier-plugin-astro": "0.14.1",
+        "vitest": "^4.0.18"
     }
 }
